@@ -1,0 +1,38 @@
+body{
+    background-image: url('../img/3.jpg');
+    font-family: cursive;
+}
+.card{
+    border-color: #bcc1818f
+}
+
+input:valid {
+    background-size: 20px;
+    background: url('../img/check.png') no-repeat 7px 7px;
+
+}
+
+input,select:invalid{
+    background: url('../img/noCheck.png') no-repeat 7px 7px;
+}
+input[type="email"]::placeholder{
+    font-size: small;
+    letter-spacing: 1px;
+}
+
+input:invalid:focus{
+    border-color:#721c24;
+}
+input{
+    padding-left: 30px !important;
+
+}
+
+th,td{
+    text-align: center;
+}
+.my-tbody {
+    max-width: 100%;
+    overflow-x: auto;
+    height: 150px;
+}

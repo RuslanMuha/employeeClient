@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container-fluid ">
+    <h1 class="h-100 ">Employee Data</h1>
+    <hr>
+    <div class="row">
+
+    <div class="col">
+
+    </div>
+    <div class="col-6">
+
+        <div class="card bg-transparent">
+
+            <div class="card-body">
+                <form autocomplete="off" data-employee="employee">
+
+                    <div class="form-group">
+                        <label for="employeeIdentifier">
+                            *Employee Identifier
+                        </label>
+                        <input type="number" class="form-control shadow-none " id="employeeIdentifier" name="id"
+                               min="0" data-employee-role="id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">
+                            *Company name
+                        </label>
+                        <input type="text" class="form-control shadow-none " id="company" name="companyName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">
+                            *Email
+                        </label>
+                        <input type="email" class="form-control shadow-none" id="email" name="emailAddress"
+                               placeholder="Gogi@gmail.com" autocomplete="new-password" required>
+                    </div>
+
+                    <label>*Gender</label>
+                    <div class="form-check">
+                        <label for="radio" class="form-check-label"></label>
+                        <input type="radio" class="form-check-input shadow-none" name="gender" value="Female" id="radio"
+                               required>
+                        Female
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label" for="radio2"></label>
+                        <input type="radio" class="form-check-input shadow-none" name="gender" value="Male" id="radio2">
+                        Male
+                    </div>
+                    <div class="form-group pt-3">
+                        <label for="employeeNames">
+                            Employee's Name
+                        </label>
+                        <input type="text" class="form-control shadow-none" id="employeeNames" name="name"
+                               autocomplete="new-password" value="" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="salary">
+                            Salary
+                        </label>
+                        <input type="number" class="form-control shadow-none" id="salary" name="salary"
+                               data-employee-role="salary" value="" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <select name="title" id="title" class="form-control shadow-none">
+                            <option value="">Wage Employee</option>
+                            <option value="employee">Employee</option>
+                            <option value="salesPerson">Sales Person</option>
+                            <option value="lineManage">Line Manager</option>
+                            <option value="seniorManager">Senior Manager</option>
+                        </select>
+                    </div>
+                    <button type="reset" class="btn btn-outline-secondary  float-right">Reset</button>
+                    <button type="submit" class="btn btn-outline-secondary float-right  mr-2">Submit</button>
+
+
+                </form>
+
+
+            </div>
+            <div class="card bg-transparent m-2">
+                <div class="card-body row">
+                    <div class="col pr-2">
+                        <h4>List of employees:</h4>
+                        <div class="table-responsive">
+                            <div class="my-tbody">
+                                <table class="table table-hover table-sm">
+                                    <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">remove</th>
+                                        <th scope="col">Id</th>
+                                        <th scope="col">Company name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Gender</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Salary</th>
+                                        <th scope="col">Title</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody data-employee="checklist">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <h4> Budget company: <label data-employee="budget" class="float-right"></label></h4>
+    </div>
+</div>
+</div>
+
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/employees.js"></script>
+<script src="scripts/company.js"></script>
+<script src="scripts/formHandler.js"></script>
+<script src="scripts/remoteEmplOper.js"></script>
+<!--<script src="scripts/checkList.js"></script>-->
+<script src="scripts/table.js"></script>
+<script src="scripts/main.js"></script>
+
+
+</body>
+</html>
