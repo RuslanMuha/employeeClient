@@ -5,34 +5,34 @@
 
         function Row(employee) {
 
-            let $tr = $('<tr></tr>',{
-                'data-employee':"checkbox"
+            let $tr = $('<tr></tr>', {
+                'data-employee': "checkbox"
             });
 
-            let $th1 = $('<th></th>',{
-                scope:'row'
+            let $th1 = $('<th></th>', {
+                scope: 'row'
             });
-            let $th2 = $('<th></th>',{
-                scope:'row'
+            let $th2 = $('<th></th>', {
+                scope: 'row'
             });
 
 
-            let $input = $('<input>',{
-                type:"checkbox",
-                value:employee.id
+            let $input = $('<input>', {
+                type: "checkbox",
+                value: employee.id
             });
 
 
             $th1.append($input);
             $th2.append(`${employee.id}`);
 
-            let empVal =  Object.values(employee).slice(1,7);
+            let empVal = Object.values(employee).slice(1, 7);
 
-            let $td = $(empVal).map((i,t)=>{
+            let $td = $(empVal).map((i, t) => {
                 return $('<td/>').text(t).get(0);
             });
 
-             $tr.append($th1).append($th2).append($td);
+            $tr.append($th1).append($th2).append($td);
             this.$rowElement = $tr;
         }
 
@@ -49,7 +49,7 @@
         };
 
         CheckList.prototype.addHandler = function (fn) {
-            this.$checkListElement.on('click','input',(event)=>{
+            this.$checkListElement.on('click', 'input', (event) => {
                 event.preventDefault();
                 let id = event.target.value;
                 fn(id);
@@ -70,25 +70,28 @@
         }
 
 
+        Budget.prototype.addBudget = function (compName, budget) {
 
-         Budget.prototype.addBudget = function(compName,budget){
-                const $el = $(`#${compName}`);
-                if($el){
-                   $el.remove();
-
-                }
-                 let $div = $('<div/>',{
-                     id:compName,
-                     text:`${compName} - ${budget}`
-                 });
-                 this.$budgetElement.append($div);
+            const $el = $(`#${compName}`);
+            if ($el) {
+                $el.remove()
+            }
+            if (budget === 0) {
+                $el.remove();
+            } else {
+                let $div = $('<div/>', {
+                    id: compName,
+                    text: `${compName} - ${budget}`
+                });
+                this.$budgetElement.append($div);
+            }
 
 
         };
 
-        CheckList.prototype.removeAllRow = function(){
+        CheckList.prototype.removeAllRow = function () {
             this.$checkListElement.empty();
-        } ;
+        };
 
         App.CheckList = CheckList;
         App.Budget = Budget;

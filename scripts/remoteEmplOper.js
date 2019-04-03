@@ -30,7 +30,13 @@
 
         RemoteDataStore.prototype.remove = function (id) {
             const urlDelete = this.serverUrl + '/employee/remove?id=' + encodeURIComponent(id);
-            return data(urlDelete,'DELETE')
+           return $.ajax({
+                url: urlDelete ,
+                type: 'DELETE',
+
+            });
+
+
         };
 
         RemoteDataStore.prototype.get = function (id) {
