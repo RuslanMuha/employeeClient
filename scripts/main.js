@@ -6,6 +6,8 @@ const MIN_SALARY = 8000;
 const MAX_SALARY = 50000;
 const error = (e) =>{alert('Server is not available'); console.log(e)} ;
 
+let login = new App.Login();
+let registr = new App.Registration();
 let employee = new App.RemoteDataStore(HOST);
 let company = new App.Company(employee);
 let handler = new App.FormHandler(SELECTOR_FORM);
@@ -15,6 +17,23 @@ let budget = new App.Budget(SELECTOR_BUDGET);
 
 let latestUpdate = {};
 
+registr.addHandler(credentials=>{
+    return employee.signup(credentials).then(res=>{
+    }).catch((e)=>{
+        console.log('error');
+       console.log(e)
+    })
+});
+
+login.addHandler(function(credentials){
+    return employee.login(credentials).then((token)=> {
+        sessionStorage.setItem('token',token.data);
+
+    }).catch( (e) =>{
+        console.log('error');
+        console.log(e)
+    })
+});
 handler.addHandler((employee) => {
     return company.hireEmployee(employee).then((response) => {
         if (response) {

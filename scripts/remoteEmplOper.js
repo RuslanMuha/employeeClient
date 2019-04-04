@@ -13,25 +13,39 @@
 
 
         function data(url, method, data = {}) {
+            let token = sessionStorage.getItem('token');
+            if(!token)token=' ';
             return fetch(url, {
                 method: method,
                 headers: {
                     "Content-Type": "application/json",
+                    'x-auth-token':token
                 },
-                body:JSON.stringify(data)
+                body: JSON.stringify(data)
             })
 
         }
 
         RemoteDataStore.prototype.add = function (id, employee) {
             const urlPost = this.serverUrl + '/employee/add';
-            return data(urlPost, 'POST', employee);
+            let token = sessionStorage.getItem('token');
+            if(!token)token=' ';
+            return $.ajax({
+                url:urlPost,
+                type:'POST',
+                data:JSON.stringify(employee),
+                contentType:'application/json',
+                headers: {
+                    'x-auth-token':token
+                }
+            });
+            // return data(urlPost, 'POST', employee);
         };
 
         RemoteDataStore.prototype.remove = function (id) {
             const urlDelete = this.serverUrl + '/employee/remove?id=' + encodeURIComponent(id);
-           return $.ajax({
-                url: urlDelete ,
+            return $.ajax({
+                url: urlDelete,
                 type: 'DELETE',
 
             });
@@ -56,8 +70,8 @@
 
         RemoteDataStore.prototype.getAll = function () {
             const urlGet = this.serverUrl + '/employee/all';
-             return $.ajax({
-                url:urlGet,
+            return $.ajax({
+                url: urlGet,
             });
 
         };
@@ -65,7 +79,7 @@
         RemoteDataStore.prototype.getSalary = function (companyName) {
             let res;
             $.ajax({
-                url: this.serverUrl + '/employee/salary?companyName='+ encodeURIComponent(companyName),
+                url: this.serverUrl + '/employee/salary?companyName=' + encodeURIComponent(companyName),
                 type: 'GET',
                 async: false,
                 success: function (response) {
@@ -75,7 +89,7 @@
             return res;
 
         };
-        RemoteDataStore.prototype.getCompany = function(company){
+        RemoteDataStore.prototype.getCompany = function (company) {
             let res;
             $.ajax({
                 url: this.serverUrl + '/employee/company?companyName=' + encodeURIComponent(company),
@@ -89,7 +103,22 @@
             return res;
         };
 
-
+        RemoteDataStore.prototype.login = function (credentials) {
+                return $.ajax({
+                    url: this.serverUrl + '/user/login',
+                    type: 'POST',
+                    data: JSON.stringify(credentials),
+                    contentType: 'application/json'
+                })
+            };
+        RemoteDataStore.prototype.signup = function (credentials) {
+                return $.ajax({
+                    url: this.serverUrl + '/user/signup',
+                    type: 'POST',
+                    data: JSON.stringify(credentials),
+                    contentType: 'application/json'
+                })
+            };
         App.RemoteDataStore = RemoteDataStore;
     }
 )();

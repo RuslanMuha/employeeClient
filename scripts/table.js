@@ -74,6 +74,7 @@
 
             const $el = $(`#${compName}`);
             if ($el) {
+                console.log($el);
                 $el.remove()
             }
             if (budget === 0) {
