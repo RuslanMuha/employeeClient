@@ -11,7 +11,9 @@ input:valid {
     background: url('../img/check.png') no-repeat 7px 7px;
 
 }
-
+input#companyEmployee{
+    background:white;
+}
 input,select:invalid{
     background: url('../img/noCheck.png') no-repeat 7px 7px;
 }
@@ -32,9 +34,9 @@ th,td{
     text-align: center;
 }
 .my-tbody {
-    max-width: 100%;
+    /*max-width: ;*/
     overflow-x: auto;
-    height: 150px;
+    height: 200px;
 }
 .active{
 

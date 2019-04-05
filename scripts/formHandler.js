@@ -41,7 +41,23 @@
             })
         };
 
+        FormHandler.prototype.addCompanyHandler = function(fn){
+            let $showAllForm = $('#showAll');
+            $showAllForm.on('submit',function (event) {
+                event.preventDefault();
+                fn()
+            })
 
+        };
+        FormHandler.prototype.getEmployeesByCompany = function(fn){
+
+            let $companyInputForm = $('#getByCompany');
+            $companyInputForm.on('submit',function (event) {
+                event.preventDefault();
+                let value = $('#companyEmployee').val();
+                fn(value,this);
+            })
+        };
 
 
         App.FormHandler=FormHandler;
