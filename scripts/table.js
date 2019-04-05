@@ -87,6 +87,9 @@
 
 
         };
+        Budget.prototype.removeBudget = function(){
+            this.$budgetElement.empty();
+        };
 
         CheckList.prototype.removeAllRow = function () {
             this.$checkListElement.empty();

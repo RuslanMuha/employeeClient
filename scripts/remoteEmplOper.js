@@ -96,17 +96,14 @@
 
         };
         RemoteDataStore.prototype.getCompany = function (company) {
-            let res;
-            $.ajax({
+            //let res;
+           return $.ajax({
                 url: this.serverUrl + '/employee/company?companyName=' + encodeURIComponent(company),
                 type: 'GET',
-                async: false,
-                success: function (response) {
-                    res = response;
-                }
+               // async: false,
             });
 
-            return res;
+           // return res;
         };
 
         RemoteDataStore.prototype.login = function (credentials) {

@@ -92,8 +92,17 @@
                                 <option value="seniorManager">Senior Manager</option>
                             </select>
                         </div>
-                        <button type="reset" class="btn btn-outline-secondary  float-right">Reset</button>
-                        <button type="submit" class="btn btn-outline-secondary float-right  mr-2">Submit</button>
+                        <button type="reset" class="btn btn-outline-danger float-right">Reset</button>
+                        <button type="submit" class="btn btn-outline-success float-right  mr-2">add employee</button>
+                    </form>
+                    <form id="showAll">
+                    <button type="submit" class="btn btn-outline-secondary float-left mr-2">show all employees</button>
+                    </form>
+                    <form id="getByCompany">
+                        <label for="companyEmployee">
+                            <input type="text" class="form-control shadow-none" id="companyEmployee" name="companyName" placeholder="company name">
+                        </label>
+                        <button type="submit" class="btn btn-outline-secondary float-left mr-2">get employees</button>
                     </form>
                 </div>
                 <div class="card bg-transparent m-2">
