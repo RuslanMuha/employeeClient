@@ -44,9 +44,14 @@
 
         RemoteDataStore.prototype.remove = function (id) {
             const urlDelete = this.serverUrl + '/employee/remove?id=' + encodeURIComponent(id);
+            let token = sessionStorage.getItem('token');
+            if(!token)token=' ';
             return $.ajax({
                 url: urlDelete,
                 type: 'DELETE',
+                headers: {
+                    'x-auth-token':token
+                }
 
             });
 

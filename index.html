@@ -10,10 +10,11 @@
 
 <div class="container-fluid ">
     <ul class="nav float-right">
-        <li class="nav-item "><a href="#" class="nav-link btn btn-outline-primary ml-2 mr-2 mt-2">employees</a></li>
-        <li class="nav-item "><a href="#" class="nav-link btn btn-outline-primary ml-2 mr-2 mt-2 active">sign up</a>
+        <li class="nav-item "><a href="#" class="nav-link btn btn-outline-primary ml-2 mr-2 mt-2"  id="li_employyes">employees</a></li>
+        <li class="nav-item " ><a href="#" class="nav-link btn btn-outline-primary ml-2 mr-2 mt-2 " id="li_signup">sign up</a>
         </li>
-        <li class="nav-item "><a href="#" class="nav-link btn btn-outline-primary ml-2 mr-2  mt-2">log in</a></li>
+        <li class="nav-item "><a href="#" class="nav-link btn btn-outline-primary ml-2 mr-2  mt-2 "  id="li_login">log in</a></li>
+        <li class="nav-item "><a href="#" class="nav-link btn btn-outline-primary ml-2 mr-2  mt-2 "  id="li_logout" hidden>log out</a></li>
     </ul>
     <h1 class="h-100 ">Employee Data</h1>
     <hr>
@@ -22,9 +23,9 @@
         <div class="col">
         </div>
         <div class="col-6">
-            <div class="card bg-transparent" hidden>
+            <div class="card bg-transparent" id="card_employee" hidden>
                 <div class="card-body">
-                    <form autocomplete="off" data-employee="employee">
+                    <form autocomplete="off" data-employee="employee" id="employee_form">
                         <div class="form-group">
                             <label for="employeeIdentifier">
                                 <!-- id -->
@@ -125,7 +126,7 @@
             </div>
         </div>
         <div class="col">
-            <h4 hidden> Budget company: <label data-employee="budget" class="float-right"></label></h4>
+            <h4 id="title_budget" hidden> Budget company: <label data-employee="budget" class="float-right"></label></h4>
         </div>
     </div>
     <!-- -------------------------------------------------Registration-------------------------------------------------->
@@ -133,7 +134,7 @@
         <div class="col">
         </div>
         <div class="col-6">
-            <div class="card bg-transparent"  hidden>
+            <div class="card bg-transparent"  id="card_registr"  hidden>
                 <div class="card-body">
                     <h2 class="text-center">Register</h2>
                     <form class="form-horizontal" autocomplete="off" id="registration_form">
@@ -185,7 +186,7 @@
         <div class="col">
         </div>
         <div class="col-6">
-            <div class="card bg-transparent">
+            <div class="card bg-transparent" id="card_login"  hidden>
                 <div class="card-body">
                     <h2 class="text-center">Log in</h2>
                     <form class="form-horizontal" autocomplete="off" id="login_form">
@@ -233,6 +234,7 @@
 <script src="scripts/table.js"></script>
 <script src="scripts/login.js"></script>
 <script src="scripts/registration.js"></script>
+<script src="scripts/navigator.js"></script>
 <script src="scripts/main.js"></script>
 </body>
 </html>

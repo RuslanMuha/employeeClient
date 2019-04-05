@@ -14,10 +14,11 @@
                         credentials[e.name] = e.value;
                     });
                // console.log(credentials);
-                fn(credentials);
-            })
+                fn(credentials,this);
+            });
+
         };
         App.Registration = Registration;
-       window.App = App;
+        window.App = App;
     }
 )();

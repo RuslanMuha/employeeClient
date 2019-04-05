@@ -6,6 +6,8 @@ const MIN_SALARY = 8000;
 const MAX_SALARY = 50000;
 const error = (e) =>{alert('Server is not available'); console.log(e)} ;
 
+let nav = new App.Navigator();
+
 let login = new App.Login();
 let registr = new App.Registration();
 let employee = new App.RemoteDataStore(HOST);
@@ -17,16 +19,28 @@ let budget = new App.Budget(SELECTOR_BUDGET);
 
 let latestUpdate = {};
 
-registr.addHandler(credentials=>{
+registr.addHandler((credentials,reg)=>{
     return employee.signup(credentials).then(res=>{
+        reg.reset();
+        nav.hidden(false,true,true,true,true,false,false);
+        let $li_login = $('#li_login');
+        let $li_signup = $('#li_signup');
+        $li_login.addClass('active');
+        $li_signup.removeClass('active');
+
     }).catch((e)=>{
         console.log('error');
        console.log(e)
     })
 });
 
-login.addHandler(function(credentials){
+login.addHandler((credentials,log)=>{
     return employee.login(credentials).then((token)=> {
+        log.reset();
+        let $li_employee = $('#li_employyes');
+        nav.hidden(true,false,true,false,false,true,true);
+
+        $li_employee.addClass('active');
         sessionStorage.setItem('token',token.data);
 
     }).catch( (e) =>{
