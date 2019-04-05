@@ -13,8 +13,6 @@
                     .forEach(function (e) {
                         credentials[e.name] = e.value;
                     });
-                console.log(credentials);
-
                 fn(credentials,this);
 
             })

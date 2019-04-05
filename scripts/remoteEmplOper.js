@@ -82,9 +82,10 @@
         };
 
         RemoteDataStore.prototype.getSalary = function (companyName) {
+            const url = this.serverUrl + '/employee/salary?companyName=' + encodeURIComponent(companyName);
             let res;
             $.ajax({
-                url: this.serverUrl + '/employee/salary?companyName=' + encodeURIComponent(companyName),
+                url: url,
                 type: 'GET',
                 async: false,
                 success: function (response) {

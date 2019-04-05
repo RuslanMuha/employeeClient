@@ -13,7 +13,7 @@ let registr = new App.Registration();
 let employee = new App.RemoteDataStore(HOST);
 let company = new App.Company(employee);
 let handler = new App.FormHandler(SELECTOR_FORM);
-let checkList = new App.CheckList(SELECTOR_CHECKLIST);
+let table = new App.CheckList(SELECTOR_CHECKLIST);
 let budget = new App.Budget(SELECTOR_BUDGET);
 
 
@@ -39,7 +39,6 @@ login.addHandler((credentials,log)=>{
         log.reset();
         let $li_employee = $('#li_employyes');
         nav.hidden(true,false,true,false,false,true,true);
-
         $li_employee.addClass('active');
         sessionStorage.setItem('token',token.data);
 
@@ -52,7 +51,7 @@ handler.addHandler((employee) => {
     return company.hireEmployee(employee).then((response) => {
         if (response) {
             const {companyName} = employee;
-            checkList.addRow(employee);
+            table.addRow(employee);
             budget.addBudget(companyName,company.computeSalaryBudget(companyName));
         }
     }).catch(error)
@@ -60,19 +59,12 @@ handler.addHandler((employee) => {
 
 });
 
-checkList.addHandler((id) => {
+table.addHandler((id) => {
     company.dismissEmployee(id).then((empl) => {
         if (empl) {
             const {companyName} = empl.data;
-            checkList.removeRow(id);
-            let bud;
-            try{
-              bud = company.computeSalaryBudget(companyName)
-            }
-            catch (e) {
-                bud = 0;
-            }
-
+            table.removeRow(id);
+            let bud = company.computeSalaryBudget(companyName);
             budget.addBudget(companyName,bud);
         }
     }).catch(error)
@@ -95,20 +87,14 @@ handler.addSalaryHandler((salary) => {
 
 function displayAll() {
 
-    let companies = {};
     employee.getAll().then((employee) => {
 
         if (JSON.stringify(latestUpdate) !== JSON.stringify(employee.data)) {
-            checkList.removeAllRow();
-            Object.values(employee.data).forEach((e) => {
-                companies[e.companyName] = company.computeSalaryBudget(e.companyName);
-                checkList.addRow(e);
-            });
-            const size = Object.keys(companies).length;
-            for (let i = 0; i < size;i++){
-                budget.addBudget(Object.keys(companies)[i],Object.values(companies)[i])
-            }
-
+            table.removeAllRow();
+            Object.values(employee.data).forEach((e)=>{
+                 table.addRow(e);
+                 budget.addBudget(e.companyName,company.computeSalaryBudget(e.companyName))
+             });
             latestUpdate = {...employee.data};
         }
 

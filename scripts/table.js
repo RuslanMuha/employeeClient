@@ -71,17 +71,15 @@
 
 
         Budget.prototype.addBudget = function (compName, budget) {
-
-            const $el = $(`#${compName}`);
+            const $el = $(`#${compName.split(' ').join('')}`);
             if ($el) {
-                console.log($el);
                 $el.remove()
             }
             if (budget === 0) {
                 $el.remove();
             } else {
                 let $div = $('<div/>', {
-                    id: compName,
+                    id: compName.split(' ').join(''),
                     text: `${compName} - ${budget}`
                 });
                 this.$budgetElement.append($div);
