@@ -31,7 +31,8 @@ registr.addHandler((credentials, reg) => {
         $li_signup.removeClass('active');
 
     }).catch((e) => {
-        alert('failed registration')
+        alert('failed registration');
+        console.log(e);
     })
 });
 
@@ -44,7 +45,10 @@ login.addHandler((credentials, log) => {
         sessionStorage.setItem('token', token.data);
 
     }).catch((e) => {
-        alert('failed login')
+
+        alert('failed login');
+        console.log(e)
+
     })
 });
 handler.addHandler((employee) => {
