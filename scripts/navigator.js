@@ -6,12 +6,42 @@
         function Navigator() {
             let token = sessionStorage.getItem('token');
             if (!token) {
-                toggleLogin();
-                showLogin();
+                this.toggleLogin();
+                this.showLogin();
             } else {
-                toggleEmployee();
-                showEmployee();
+                this.toggleEmployee();
+                this.showEmployee();
             }
+
+            $('#li_employyes').on('click', (event) => {
+                event.preventDefault();
+                this.toggleEmployee();
+                this.showEmployee();
+
+            }).bind(this);
+
+            $('#li_signup').on('click', (event) => {
+                event.preventDefault();
+                this.toggleSignup();
+                this.showSignup();
+
+            }).bind(this);
+
+            $('#li_login').on('click', (event) => {
+                event.preventDefault();
+                this.toggleLogin();
+                this.showLogin();
+            }).bind(this);
+
+
+            $('#li_logout').on('click', (event) => {
+                event.preventDefault();
+                sessionStorage.removeItem('token');
+                this.toggleLogin();
+                this.showLogOut()
+
+            }).bind(this);
+
         }
 
 
@@ -25,103 +55,77 @@
         let $signup = $('#card_registr');
         let $budget = $('#title_budget');
 
-        function toggle(a, b, c) {
-            if (a) {
-                $li_login.addClass('active');
-            } else {
-                $li_login.removeClass('active');
-            }
-            if (b) {
-                $li_employee.addClass('active');
-            } else {
-                $li_employee.removeClass('active');
-            }
-            if (c) {
-                $li_signup.addClass('active');
-            } else {
-                $li_signup.removeClass('active');
-            }
-        }
-
-        Navigator.prototype.hidden = function (login, employee, signup, budget, li_logout, li_signup, li_login) {
-            hidden(login, employee, signup, budget, li_logout, li_signup, li_login)
+        Navigator.prototype.showLogin = function () {
+            $login.attr('hidden', false);
+            $employee.attr('hidden', true);
+            $signup.attr('hidden', true);
+            $budget.attr('hidden', true);
+            $li_logout.attr('hidden', true);
+            $li_signup.attr('hidden', false);
+            $li_login.attr('hidden', false);
         };
 
-        function hidden(login, employee, signup, budget, li_logout, li_signup, li_login) {
-            $login.attr('hidden', login);
-            $employee.attr('hidden', employee);
-            $signup.attr('hidden', signup);
-            $budget.attr('hidden', budget);
-            $li_logout.attr('hidden', li_logout);
-            $li_signup.attr('hidden', li_signup);
-            $li_login.attr('hidden', li_login);
-        }
-
-        function toggleLogin() {
-            toggle(true, false, false);
-        }
-
-        function showLogin() {
-            hidden(false, true, true, true, true, false, false);
-        }
+        Navigator.prototype.toggleLogin = function () {
+                $li_login.addClass('active');
+                $li_employee.removeClass('active');
+                $li_signup.removeClass('active');
+        };
 
 
-        function toggleEmployee() {
-            toggle(false, true, false)
+        Navigator.prototype.toggleEmployee = function () {
+            $li_login.removeClass('active');
+            $li_employee.addClass('active');
+            $li_signup.removeClass('active');
+        };
 
-        }
-
-        function showEmployee() {
+        Navigator.prototype.showEmployee = function ()  {
             let token = sessionStorage.getItem('token');
+            $login.attr('hidden', true);
+            $employee.attr('hidden', false);
+            $signup.attr('hidden', true);
+            $budget.attr('hidden', false);
+
             if (token) {
-                hidden(true, false, true, false, false, true, true);
+                $li_logout.attr('hidden', false);
+                $li_signup.attr('hidden', true);
+                $li_login.attr('hidden', true);
+
             } else {
-                hidden(true, false, true, false, true, false, false);
+                $li_logout.attr('hidden', true);
+                $li_signup.attr('hidden', false);
+                $li_login.attr('hidden', false);
             }
 
-        }
+        };
 
-        function showSignup() {
-            hidden(true, true, false, true,true,false,false);
-        }
+        Navigator.prototype.showSignup= function ()  {
 
-        function toggleSignup() {
-            toggle(false, false, true);
-        }
+            $login.attr('hidden', true);
+            $employee.attr('hidden', true);
+            $signup.attr('hidden', false);
+            $budget.attr('hidden', true);
+            $li_logout.attr('hidden', true);
+            $li_signup.attr('hidden', false);
+            $li_login.attr('hidden', false);
+        };
 
-        function showLogOut() {
-            hidden(false, true, true, true, true, false, false);
-        }
+        Navigator.prototype.toggleSignup = function ()  {
+            $li_login.removeClass('active');
+            $li_employee.removeClass('active');
+            $li_signup.addClass('active');
+        };
 
-        $('#li_employyes').on('click', (event) => {
-            event.preventDefault();
-            toggleEmployee();
-            showEmployee();
-
-        });
-
-        $('#li_signup').on('click', (event) => {
-            event.preventDefault();
-            toggleSignup();
-            showSignup();
-
-        });
-
-        $('#li_login').on('click', (event) => {
-            event.preventDefault();
-            toggleLogin();
-            showLogin();
-        });
+        Navigator.prototype.showLogOut = function () {
+            $login.attr('hidden', false);
+            $employee.attr('hidden', true);
+            $signup.attr('hidden', true);
+            $budget.attr('hidden', true);
+            $li_logout.attr('hidden', true);
+            $li_signup.attr('hidden', false);
+            $li_login.attr('hidden', false);
+        };
 
 
-
-        $('#li_logout').on('click', (event) => {
-            event.preventDefault();
-            sessionStorage.removeItem('token');
-            toggleLogin();
-            showLogOut()
-
-        });
         App.Navigator = Navigator;
         window.App = App;
 

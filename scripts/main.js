@@ -24,12 +24,8 @@ let latestUpdate = {};
 registr.addHandler((credentials, reg) => {
     return employee.signup(credentials).then(res => {
         reg.reset();
-        nav.hidden(false, true, true, true, true, false, false);
-        let $li_login = $('#li_login');
-        let $li_signup = $('#li_signup');
-        $li_login.addClass('active');
-        $li_signup.removeClass('active');
-
+        nav.showLogin();
+        nav.toggleLogin();
     }).catch((e) => {
         alert('failed registration');
         console.log(e);
@@ -39,13 +35,10 @@ registr.addHandler((credentials, reg) => {
 login.addHandler((credentials, log) => {
     return employee.login(credentials).then((token) => {
         log.reset();
-        let $li_employee = $('#li_employyes');
-        nav.hidden(true, false, true, false, false, true, true);
-        $li_employee.addClass('active');
         sessionStorage.setItem('token', token.data);
-
+        nav.showEmployee();
+        nav.toggleEmployee();
     }).catch((e) => {
-
         alert('failed login');
         console.log(e)
 
