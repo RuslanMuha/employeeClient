@@ -1,4 +1,4 @@
-const HOST = 'http://localhost:8080';
+const HOST = 'http://localhost:3000';
 const SELECTOR_FORM = '[data-employee="employee"]';
 const SELECTOR_CHECKLIST = '[data-employee="checklist"]';
 const SELECTOR_BUDGET = '[data-employee="budget"]';
@@ -6,7 +6,6 @@ const MIN_SALARY = 8000;
 const MAX_SALARY = 50000;
 const error = (e) => {
     alert('Server is not available');
-    console.log(e)
 };
 
 let nav = new App.Navigator();
@@ -32,8 +31,7 @@ registr.addHandler((credentials, reg) => {
         $li_signup.removeClass('active');
 
     }).catch((e) => {
-        console.log('error');
-        console.log(e)
+        alert('failed registration')
     })
 });
 
@@ -46,8 +44,7 @@ login.addHandler((credentials, log) => {
         sessionStorage.setItem('token', token.data);
 
     }).catch((e) => {
-        console.log('error');
-        console.log(e)
+        alert('failed login')
     })
 });
 handler.addHandler((employee) => {
