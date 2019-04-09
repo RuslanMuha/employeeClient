@@ -4,6 +4,8 @@ const SELECTOR_CHECKLIST = '[data-employee="checklist"]';
 const SELECTOR_BUDGET = '[data-employee="budget"]';
 const MIN_SALARY = 8000;
 const MAX_SALARY = 50000;
+const URL_SOCKET = 'ws://localhost:3000/socket';
+
 const error = (e) => {
     alert('Server is not available');
 };
@@ -48,7 +50,9 @@ handler.addHandler((employee) => {
     return company.hireEmployee(employee).then((response) => {
         if (response) {
             const {companyName} = employee;
+            table.removeRow(employee.id);
             table.addRow(employee);
+
             budget.addBudget(companyName, company.computeSalaryBudget(companyName));
         }
     }).catch(error)
@@ -84,15 +88,11 @@ handler.addSalaryHandler((salary) => {
 function displayAll() {
 
     employee.getAll().then((employee) => {
-
-        if (JSON.stringify(latestUpdate) !== JSON.stringify(employee.data)) {
             table.removeAllRow();
             Object.values(employee.data).forEach((e) => {
                 table.addRow(e);
                 budget.addBudget(e.companyName, company.computeSalaryBudget(e.companyName))
             });
-            latestUpdate = {...employee.data};
-        }
 
     })
 
@@ -121,8 +121,19 @@ handler.getEmployeesByCompany((companyName, input) => {
     })
 });
 
-// displayAll();
-//setInterval(displayAll, 1000);
+new App.Webclient(URL_SOCKET,addEmployee,removeEmployee);
 
 
+function addEmployee (employee){
+    const {companyName} = employee;
+    table.removeRow(employee.id);
+    table.addRow(employee);
+    budget.addBudget(companyName, company.computeSalaryBudget(companyName));
+};
 
+function removeEmployee(id,companyName){
+    table.removeRow(id);
+    budget.addBudget(companyName, company.computeSalaryBudget(companyName));
+};
+
+displayAll();
