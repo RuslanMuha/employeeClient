@@ -136,4 +136,4 @@ function removeEmployee(id,companyName){
     budget.addBudget(companyName, company.computeSalaryBudget(companyName));
 };
 
-displayAll();
+//displayAll();

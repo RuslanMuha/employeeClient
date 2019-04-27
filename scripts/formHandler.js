@@ -42,11 +42,10 @@
         };
 
         FormHandler.prototype.addCompanyHandler = function(fn){
-            let $showAllForm = $('#showAll');
-            $showAllForm.on('submit',function (event) {
+            $('#btn').on('click',(event)=>{
                 event.preventDefault();
-                fn()
-            })
+                    fn()
+            });
 
         };
         FormHandler.prototype.getEmployeesByCompany = function(fn){
